@@ -1,0 +1,39 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class AnagramChecker {
+
+    public static Map<Character, Integer> generateHistogram(String s) {
+        /* Creates a histogram of characters in a string. */
+        Map<Character, Integer> hist = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            hist.put(c, hist.getOrDefault(c, 0) + 1);
+        }
+        return hist;
+    }
+
+    public static boolean areAnagrams(String str1, String str2) {
+        /* Checks if two strings are anagrams of each other. */
+        // Generate histograms for both strings
+        Map<Character, Integer> hist1 = generateHistogram(str1.toLowerCase().replaceAll(" ", ""));
+        Map<Character, Integer> hist2 = generateHistogram(str2.toLowerCase().replaceAll(" ", ""));
+
+        // Check if both histograms are identical
+        return hist1.equals(hist2);
+    }
+
+    public static void main(String[] args) {
+        // Test the function
+        String string1 = "stop";
+        String string2 = "pots";
+        System.out.println(areAnagrams(string1, string2)); // Output: true
+
+        string1 = "allen downey";
+        string2 = "well annoyed";
+        System.out.println(areAnagrams(string1, string2)); // Output: true
+
+        string1 = "christopher mayfield";
+        string2 = "hi prof the camel is dry";
+        System.out.println(areAnagrams(string1, string2)); // Output: true
+    }
+}
